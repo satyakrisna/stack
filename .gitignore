@@ -1,0 +1,12 @@
+node_modules
+.next
+.env
+.env.local
+*.tsbuildinfo
+
+# Approved design boards are local-only review inputs, not runtime assets.
+/design/reference/*.png
+/design/reference/*.png.png
+
+# Generated runtime icon renditions are local-only; the app ships the SVG source.
+/public/*.png
