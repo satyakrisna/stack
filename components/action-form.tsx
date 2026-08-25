@@ -1,0 +1,2 @@
+'use client';import {useActionState} from 'react';
+export function ActionForm({action,children,label}:{action:(s:unknown,f:FormData)=>Promise<any>;children:React.ReactNode;label:string}){const [state,formAction,pending]=useActionState(action,null);return <form action={formAction}>{children}{state?.error&&<p className="error" role="alert">{state.error}</p>}<button className="primary" disabled={pending}>{pending?'WORKING…':label}</button></form>}

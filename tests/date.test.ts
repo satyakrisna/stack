@@ -1,0 +1,1 @@
+import {it,expect} from 'vitest';import {localDate} from '@/lib/date';it('uses the user timezone at a boundary',()=>{const x=new Date('2026-08-20T23:30:00Z');expect(localDate(x,'Asia/Jakarta')).toBe('2026-08-21');expect(localDate(x,'America/New_York')).toBe('2026-08-20')});
