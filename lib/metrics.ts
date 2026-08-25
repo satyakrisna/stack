@@ -1,0 +1,6 @@
+import { dateAdd,weekKey } from './date';
+export type Cadence='DAILY'|'WEEKLY'; export type Metrics={currentStreak:number;bestStreak:number;lifetimeProof:number;stackRate:number};
+const unique=(xs:string[])=>[...new Set(xs)].sort();
+export function periodKeys(entries:string[],cadence:Cadence){return unique(cadence==='WEEKLY'?entries.map(weekKey):entries)}
+export function calculateStackMetrics(entries:string[],cadence:Cadence,today:string,created:string):Metrics{const keys=periodKeys(entries,cadence),now=cadence==='WEEKLY'?weekKey(today):today,start=cadence==='WEEKLY'?weekKey(created):created,step=cadence==='WEEKLY'?7:1,set=new Set(keys);let current=0,cursor=now;if(!set.has(cursor))cursor=dateAdd(cursor,-step);while(set.has(cursor)){current++;cursor=dateAdd(cursor,-step)}let best=0,run=0,prev='';for(const k of keys){run=prev&&dateAdd(prev,step)===k?run+1:1;best=Math.max(best,run);prev=k}let eligible=1,c=start;while(c<now){eligible++;c=dateAdd(c,step)}return{currentStreak:current,bestStreak:best,lifetimeProof:unique(entries).length,stackRate:eligible?Math.round(keys.length/eligible*100):0}}
+export const calculateGlobalMetrics=(items:Metrics[])=>({lifetimeProof:items.reduce((n,x)=>n+x.lifetimeProof,0),currentProof:items.reduce((n,x)=>n+x.currentStreak,0)});

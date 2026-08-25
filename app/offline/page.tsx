@@ -1,0 +1,1 @@
+export default function Page(){return <main className="app center"><h1 className="brand">STACK</h1><div className="empty"><h2>YOU&apos;RE OFFLINE</h2><p className="subtle">Your proof is safe. Reconnect to stack today.</p></div></main>}

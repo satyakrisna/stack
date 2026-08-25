@@ -1,0 +1,1 @@
+export default function Loading(){return <main className="app"><div className="skeleton" style={{height:34,width:110,borderRadius:8}}/><div className="skeleton" style={{height:90,margin:'25px 0',borderRadius:14}}/>{[1,2,3,4].map(x=><div key={x} className="skeleton" style={{height:70,margin:'10px 0',borderRadius:15}}/>)}</main>}
